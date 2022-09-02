@@ -1,4 +1,5 @@
 ﻿using DynamicConverters.Attributes;
+using DynamicConverters.Conversion.Converters;
 using System.Reflection;
 
 namespace DynamicConverters.Conversion
@@ -16,7 +17,7 @@ namespace DynamicConverters.Conversion
     {
         protected object? source;
 
-        public T Convert()
+        public virtual T Convert()
         {
             if(source == null)
                 throw new Exception("Source value has not ben initialised.");
@@ -26,11 +27,11 @@ namespace DynamicConverters.Conversion
             if(field == null)
                 throw new Exception("Converter implementation is missing source property.");
 
-            field.SetValue(this, this.source);
+            field.SetValue(this, source);
 
             List<MethodInfo> methods = this.GetType().GetMethods().Where(x => x.ReturnType == typeof(T)).ToList();
 
-            foreach(MethodInfo method in methods)
+            foreach (MethodInfo method in methods)
             {
                 var attr = method.GetCustomAttribute(typeof(ConversionTargetAttribute));
 
@@ -42,7 +43,7 @@ namespace DynamicConverters.Conversion
                     {
                         object? result = method.Invoke(this, null);
 
-                        if(result != null)
+                        if (result != null)
                             return (T)result;
                     }
                 }
