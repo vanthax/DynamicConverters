@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DynamicConverters.Model
 {
-    internal struct Bar
+    public struct Bar
     {
         public char[] Value { get; set; }
     }

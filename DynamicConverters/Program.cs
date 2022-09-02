@@ -1,4 +1,4 @@
-﻿using DynamicConverters.Converters;
+﻿using DynamicConverters.Conversion;
 using DynamicConverters.Model;
 
 namespace DynamicConverters
@@ -15,7 +15,7 @@ namespace DynamicConverters
             Console.WriteLine("Bar (as string): " + new string(bar.Value));
 
             Foo foo2 = Converter.From(bar).To<Foo>().Convert();
-            Console.WriteLine("Foo2: " + foo.Value);
+            Console.WriteLine("Foo2: " + foo2.Value);
 
             Console.ReadKey();
         }

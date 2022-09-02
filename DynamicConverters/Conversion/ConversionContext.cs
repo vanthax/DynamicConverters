@@ -1,19 +1,14 @@
 ﻿using DynamicConverters.Attributes;
 using System.Reflection;
 
-namespace DynamicConverters.Converters
+namespace DynamicConverters.Conversion
 {
-    internal class ConversionContext<T>
+    public class ConversionContext<T>
     {
         private T source;
         private List<Type> converterTypes;
         private Assembly[]? assemblies;
         private string? nSpace;
-
-        public static ConversionContext<V> From<V>(V source)
-        {
-            return new ConversionContext<V>(source);
-        }
 
         public ConversionContext(T source)
         {
